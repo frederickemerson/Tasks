@@ -57,7 +57,7 @@ public class Main {
     }
 
     public static void printDeadlineUsingStream(ArrayList<Task> tasks){
-        tasks.stream().filter(t -> t instanceof Deadline).forEach(System.out::println));
+        tasks.stream().filter(t -> t instanceof Deadline).forEach(System.out::println);
     }
 
 }
