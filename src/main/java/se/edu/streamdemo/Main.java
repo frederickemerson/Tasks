@@ -5,6 +5,9 @@ import se.edu.streamdemo.task.Deadline;
 import se.edu.streamdemo.task.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class Main {
     public static void main(String[] args) {
@@ -57,7 +60,15 @@ public class Main {
     }
 
     public static void printDeadlineUsingStream(ArrayList<Task> tasks){
-        tasks.stream().filter(t -> t instanceof Deadline).forEach(System.out::println);
+        tasks.stream().filter(t -> t instanceof Deadline)
+                .sorted((t1,t2) -> t1.getDescription().compareToIgnoreCase(t2.getDescription()))
+                .forEach(System.out::println);
+    }
+
+    public static ArrayList<Task> filterTasksByString(ArrayList<Task> tasks, String filterString){
+        return (ArrayList<Task>) tasks.stream()
+                .filter(t -> t.getDescription().contains(filterString))
+                .collect(toList());
     }
 
 }
